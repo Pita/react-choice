@@ -40,9 +40,7 @@ var SingleChoice = React.createClass({
     };
   },
 
-  _getAvailableOptions: function() {
-    var options = this.props.options;
-
+  _getAvailableOptions: function(options) {
     return this._sort(options);
   },
 
@@ -113,8 +111,8 @@ var SingleChoice = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    if (nextProps.value !== this.props.value) {
-      var options = this._getAvailableOptions();
+    if (nextProps.value !== this.props.value || nextProps.options !== this.props.options) {
+      var options = this._getAvailableOptions(nextProps.options);
 
       var selected = _.find(options, function(option) {
         return option[this.props.valueField] == nextProps.value;

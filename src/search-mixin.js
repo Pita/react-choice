@@ -42,7 +42,7 @@ var SearchMixin = {
 
     var query = event.target.value;
 
-    var options = this._getAvailableOptions();
+    var options = this._getAvailableOptions(this.props.options);
 
     var searcher = new Sifter(options);
 

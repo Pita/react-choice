@@ -105,7 +105,7 @@ var MultipleChoice = React.createClass({
       var values = this.state.values.slice(0); // copy
       values.push(option);
 
-      var options = this._getAvailableOptions(values);
+      var options = this._getAvailableOptions(this.props.options, values);
 
       var state = this._resetSearch(options);
       state.values = values;
@@ -118,8 +118,7 @@ var MultipleChoice = React.createClass({
     }
   },
 
-  _getAvailableOptions: function(values) {
-    var options = this.props.options;
+  _getAvailableOptions: function(options, values) {
     var valueField = this.props.valueField;
 
     if (this.props.allowDuplicates === false && values) {
@@ -192,7 +191,7 @@ var MultipleChoice = React.createClass({
     var values = this.state.values.slice(0); // copy
     var removedOption = values.splice(index, 1);
 
-    var options = this._getAvailableOptions(values);
+    var options = this._getAvailableOptions(this.props.options, values);
 
     var state = this._resetSearch(options);
     state.values = values;
@@ -248,8 +247,8 @@ var MultipleChoice = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    if (nextProps.values !== this.props.values) {
-      var options = this._getAvailableOptions(nextProps.values);
+    if (nextProps.values !== this.props.values || nextProps.options !== this.props.options) {
+      var options = this._getAvailableOptions(nextProps.options, nextProps.values);
 
       var state = this._resetSearch(options);
       state.values = nextProps.values;
